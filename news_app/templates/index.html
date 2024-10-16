@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>News Search Engine</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #4d4d4d;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .search-container {
+            text-align: center;
+            margin-top: 10vh;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .search-input {
+            width: 300px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 24px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #4285f4;
+            box-shadow: 0px 0px 5px #4285f4;
+        }
+
+        .search-button {
+            background-color: #4285f4;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-size: 1rem;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #357ae8;
+        }
+
+        .news-container {
+            width: 80%;
+            max-width: 600px;
+            margin-top: 30px;
+        }
+
+        .news-item {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .news-item:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-title {
+            font-size: 1.2rem;
+            color: #1a0dab;
+            text-decoration: none;
+        }
+
+        .news-description {
+            margin-top: 10px;
+            color: #4d4d4d;
+        }
+
+        .news-meta {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <h1>News Search Engine</h1>
+        <form class="search-form" method="get" action="/">
+            <input type="text" name="query" placeholder="Pesquisar notícias..." value="{{ query }}" class="search-input">
+            <button type="submit" class="search-button">Buscar</button>
+        </form>
+    </div>
+    
+    <div class="news-container">
+        {% for article in news %}
+            <div class="news-item">
+                <a href="{{ article.url }}" target="_blank" class="news-title">{{ article.title }}</a>
+                <p class="news-description">{{ article.description }}</p>
+                <p class="news-meta">Fonte: {{ article.source.name }} | Publicado em: {{ article.publishedAt }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
